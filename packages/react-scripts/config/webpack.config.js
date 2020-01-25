@@ -270,8 +270,8 @@ module.exports = function(webpackEnv) {
               : false,
           },
           cssProcessorPluginOptions: {
-              preset: ['default', { minifyFontValues: { removeQuotes: false } }]
-          }
+            preset: ['default', { minifyFontValues: { removeQuotes: false } }],
+          },
         }),
       ],
       // Automatically split vendor and commons
@@ -442,6 +442,8 @@ module.exports = function(webpackEnv) {
                       },
                     },
                   ],
+                  [require.resolve('@babel/plugin-transform-typescript')],
+                  [require.resolve('babel-plugin-react-intl-auto')],
                 ],
                 // This is a feature of `babel-loader` for webpack (not Babel itself).
                 // It enables caching results in ./node_modules/.cache/babel-loader/
