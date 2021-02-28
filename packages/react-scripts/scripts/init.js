@@ -10,7 +10,7 @@
 // Makes the script crash on unhandled rejections instead of silently
 // ignoring them. In the future, promise rejections that are not handled will
 // terminate the Node.js process with a non-zero exit code.
-process.on('unhandledRejection', err => {
+process.on('unhandledRejection', (err) => {
   throw err;
 });
 
@@ -81,7 +81,7 @@ function tryGitCommit(appPath) {
   }
 }
 
-module.exports = function(
+module.exports = function (
   appPath,
   appName,
   verbose,
@@ -159,12 +159,14 @@ module.exports = function(
 
   // Keys from templatePackage that will be added to appPackage,
   // replacing any existing entries.
-  const templatePackageToReplace = Object.keys(templatePackage).filter(key => {
-    return (
-      !templatePackageBlacklist.includes(key) &&
-      !templatePackageToMerge.includes(key)
-    );
-  });
+  const templatePackageToReplace = Object.keys(templatePackage).filter(
+    (key) => {
+      return (
+        !templatePackageBlacklist.includes(key) &&
+        !templatePackageToMerge.includes(key)
+      );
+    }
+  );
 
   // Copy over some of the devDependencies
   appPackage.dependencies = appPackage.dependencies || {};
@@ -202,7 +204,7 @@ module.exports = function(
   appPackage.browserslist = defaultBrowsers;
 
   // Add templatePackage keys/values to appPackage, replacing existing entries
-  templatePackageToReplace.forEach(key => {
+  templatePackageToReplace.forEach((key) => {
     appPackage[key] = templatePackage[key];
   });
 
@@ -280,7 +282,7 @@ module.exports = function(
   } else {
     command = 'npm';
     remove = 'uninstall';
-    args = ['install', '--save', verbose && '--verbose'].filter(e => e);
+    args = ['install', '--save', verbose && '--verbose'].filter((e) => e);
   }
 
   // Install additional template dependencies, if present
@@ -289,7 +291,7 @@ module.exports = function(
     templatePackage.dependencies || templateJson.dependencies;
   if (templateDependencies) {
     args = args.concat(
-      Object.keys(templateDependencies).map(key => {
+      Object.keys(templateDependencies).map((key) => {
         return `${key}@${templateDependencies[key]}`;
       })
     );
@@ -313,7 +315,7 @@ module.exports = function(
     }
   }
 
-  if (args.find(arg => arg.includes('typescript'))) {
+  if (args.find((arg) => arg.includes('typescript'))) {
     console.log();
     verifyTypeScriptSetup();
   }

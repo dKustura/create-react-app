@@ -12,7 +12,7 @@ import OptionalChaining from './OptionalChaining';
 describe('optional chaining', () => {
   it('renders without crashing', () => {
     const div = document.createElement('div');
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
       ReactDOM.render(<OptionalChaining onReady={resolve} />, div);
     });
   });
